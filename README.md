@@ -15,7 +15,7 @@ There are two types of PAKEs: balanced and augmented. An example of balanced wou
 
 The SRP protocol allows the server to authenticate the client, without it ever sending the plain text password over the wire. However, the client is required to send a "verifier" to the server when registering. Unfortunately, though, the "verifier" has been *derived* from a password, and hence it can be exposed using a brute force attack.
 
-SPEKE on the other hand requires that both the client and the server know the password in advance. The password is therefore never sent across the wire. SPEKE can thus be used in a "two-factor" registration system, where a small password is generated on the fly, and can then be retrieved by a user somehow. Using the password, the client and the server will establish a secure channel via SPEKE. Afterwards, the client can securely send the verfier to the server.
+SPEKE on the other hand requires that both the client and the server know the password in advance. The password is therefore never sent across the wire. SPEKE can thus be used in a "two-factor" registration system, where a small password is generated on the fly, and can then be retrieved by a user somehow. Using the password, the client and the server will establish a secure channel after the SPEKE handshake. Afterwards, the client can securely send the verfier to the server.
 
 ## Example
 
@@ -42,6 +42,50 @@ assert(alice_secret.length > 1);
 assert(alice_secret === bob_secret);
 ```
 
+If you want to implement SRP, then you would simply establish a secure channel, using the shared secret as the password in a cipher (such as AES).
+
+On the client:
+
+```
+// Where `params` is the set of parameters used by the Mozilla SRP library,
+// salt being a random nonce, identity being a unique identifier that represents
+// a user (such as a username, email, etc.) and password represents the password
+// that the user will enter, but the server won't know without brute forcing the
+// verifier.
+var verifier = srp.computeVerifier(params, salt, identity, password);
+
+// Create a helper object to encipher the verifier, before sending it to the
+// server.
+//
+// Do note that the `secret` parameter was generated during the SPEKE handshake.
+var cipher = crypto.createCipher(algorithm, secret);
+
+// Encipher the verifier.
+var data = cipher.update(verifier);
+data.write(cipher.final());
+
+// Send the data to the server.
+socket.send(data);
+```
+
+And then, on the server:
+
+```
+// Let `read` be a synchronous socket stream function (not that any such
+// function is available out of the box in Node.js), we will get the enciphered
+// verifier from the client
+var verifierEnciphered = read();
+
+// Create a decipher object.
+var decipher = crypto.createDecipher(algorithm, secret);
+
+// Create a buffer that will store the deciphered verifier
+var verifier = cipher.update(verifier);
+verifier.write(cipher.final());
+
+// Store the verifier however you want.
+```
+
 ## API
 
-The API is 100% compatible with [Node.js Crypto's Diffie-Hellman API](http://nodejs.org/api/crypto.html#crypto_class_diffiehellman), except that the `generateKeys` method **absolutely** requires a password as the first parameter, and the second parameter is an optional encoding type, which can either be set to `'binary'`, `'hex'`, or `'base64'`.
+The API is 100% compatible with [Node.js Crypto's Diffie-Hellman API](http://nodejs.org/api/crypto.html#crypto_class_diffiehellman), except that the `generateKeys` method **absolutely** requires a password as the first parameter, and the second parameter is an optional encoding type, which can either be set to `'binary'`, `'hex'`, or `'base64'`. At the absense of the latter parameter, a buffer is returned for the public key.
