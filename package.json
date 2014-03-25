@@ -1,5 +1,5 @@
 {
-  "speke":,
+  "name": "speke",
   "version": "0.0.1",
   "description": "Simple Password Exponential Key Exchange for Node.js. Resistant to MITM, unlike vanilla Diffie-Hellman",
   "main": "./index.js",
