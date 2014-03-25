@@ -46,7 +46,7 @@ If you want to implement SRP, then you would simply establish a secure channel, 
 
 On the client:
 
-```
+```javascript
 // Where `params` is the set of parameters used by the Mozilla SRP library,
 // salt being a random nonce, identity being a unique identifier that represents
 // a user (such as a username, email, etc.) and password represents the password
@@ -70,7 +70,7 @@ socket.send(data);
 
 And then, on the server:
 
-```
+```javascript
 // Let `read` be a synchronous socket stream function (not that any such
 // function is available out of the box in Node.js), we will get the enciphered
 // verifier from the client
