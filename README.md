@@ -4,7 +4,7 @@ An incredibly simple balanced password-authenticated key exchange (PAKE) for Nod
 
 [![Build Status](https://travis-ci.org/shovon/node-speke.svg)](https://travis-ci.org/shovon/node-speke)
 
-This library is an implementation of SPEKE. Meant to reflect Node.js crypto's Diffie-Hellman API.
+This library is an implementation of [SPEKE](http://en.wikipedia.org/wiki/SPEKE_(cryptography)). Meant to reflect Node.js crypto's Diffie-Hellman API.
 
 There are two types of PAKEs: balanced and augmented. An example of balanced would be SPEKE, and an example of augmented would be SRP. Here is a comparison between the two afforementioned key exchanges:
 
