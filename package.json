@@ -1,4 +1,26 @@
 {
+  "speke":,
+  "version": "0.0.1",
+  "description": "Simple Password Exponential Key Exchange for Node.js. Resistant to MITM, unlike vanilla Diffie-Hellman",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shovon/node-speke.git"
+  },
+  "keywords": [
+    "speke",
+    "diffiehellman",
+    "mitrmaresistant",
+    "keyexchange",
+    "publickeycryptography",
+    "pake",
+    "cryptography"
+  ],
+  "author": {
+    "name": "Salehen Shovon Rahman",
+    "email": "salehen.rahman@gmail.com",
+    "url": "http://shovon.github.io"
+  },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha test.js"
   },
