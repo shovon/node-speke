@@ -33,4 +33,4 @@ assert(alice_secret === bob_secret);
 
 ## API
 
-The API is 100% compatible with [Node.js Crypto's Diffie-Hellman API](http://nodejs.org/api/crypto.html#crypto_class_diffiehellman), except that the `generateKeys` method **absolutely** requires a password as the first parameter, and the second parameter is an optional encoding type, which can either be set to `'binary'`, `'hex'`, or `'base64'`. At the absense of the latter parameter, a buffer is returned for the public key.
+The API is 100% compatible with [Node.js Crypto's Diffie-Hellman API](http://nodejs.org/api/crypto.html#crypto_class_diffiehellman), except that the `generateKeys` method **absolutely** requires a password as the first parameter, and the second parameter is an optional encoding type, which can either be set to `'binary'`, `'hex'`, or `'base64'`. At the absence of the latter parameter, a buffer is returned for the public key.
