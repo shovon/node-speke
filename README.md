@@ -17,7 +17,7 @@ var alice = SPEKE.getSPEKE('modp5');
 var bob = SPEKE.getSPEKE('modp5');
 
 // Initialize the generator, based on the password, as well as create the
-// private and private keys.
+// public and private keys.
 alice.generateKeys(password);
 bob.generateKeys(password);
 
