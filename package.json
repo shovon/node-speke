@@ -1,6 +1,6 @@
 {
   "name": "speke",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple Password Exponential Key Exchange for Node.js. Resistant to MITM, unlike vanilla Diffie-Hellman",
   "main": "./index.js",
   "repository": {
@@ -18,7 +18,7 @@
   ],
   "author": {
     "name": "Salehen Shovon Rahman",
-    "email": "salehen.rahman@gmail.com",
+    "email": "sal@linux.com",
     "url": "http://shovon.github.io"
   },
   "scripts": {
