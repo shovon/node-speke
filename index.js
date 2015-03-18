@@ -1,5 +1,5 @@
 var crypto = require('crypto');
-var bigint = require('bigint');
+var bigint = require('bignum');
 
 module.exports = module.exports.createSPEKE = SPEKE;
 function SPEKE(sizeOrKey, encoding) {
